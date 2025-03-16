@@ -6,7 +6,7 @@ The **Password Strength Meter** is a Python-based web application built with [St
 
 ## Live Demo
 
-Check out the live demo of the Password Strength Meter [here](YOUR_LIVE_DEMO_LINK).
+Check out the live demo of the Password Strength Meter [here](https://password-strength-meter-by-zija.streamlit.app/).
 
 ## Benefits
 
