@@ -85,7 +85,7 @@ with col_check:
     check_pw = st.button("Check Password Strength")
 
 # -- Password Check Feedback Section --
-if check_pw or user_password:
+if check_pw:
     if user_password:
         strength, feedback = check_password_strength(user_password)
         if strength == "Strong":
