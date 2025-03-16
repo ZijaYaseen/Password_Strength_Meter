@@ -3,6 +3,23 @@ import re
 import random
 import string
 
+# Set page config at the very start
+st.set_page_config(page_title="🔐 Password Strength Meter", layout="centered")
+
+# Inject custom CSS using flexbox to vertically center the button
+st.markdown(
+    """
+    <style>
+    .center-button-container {
+        display: flex;
+        align-items: center;
+        min-height: 28px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Common password blacklist
 COMMON_PASSWORDS = [
     "password", "123456", "12345678", "qwerty", "abc123",
@@ -73,16 +90,18 @@ def check_password_strength(password):
 if "generated_password" not in st.session_state:
     st.session_state["generated_password"] = ""
 
-st.set_page_config(page_title="🔐 Password Strength Meter", layout="centered")
 st.title("🔐 Password Strength Meter")
 st.markdown("Check your password security and get improvement suggestions.")
 
 # -- Password Input Section --
-col_input, col_check = st.columns([3, 1])
+col_input, col_check = st.columns([3, 2])
 with col_input:
     user_password = st.text_input("Enter Password:", type="password", key="password_input")
 with col_check:
+    # Wrap the button in a flex container for vertical centering
+    st.markdown("<div class='center-button-container'>", unsafe_allow_html=True)
     check_pw = st.button("Check Password Strength")
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # -- Password Check Feedback Section --
 if check_pw:
@@ -105,14 +124,16 @@ if check_pw:
     else:
         st.warning("Please enter a password to check.")
 
-# -- Password Generator Section (Displayed below the check results) --
+# -- Password Generator Section --
 st.markdown("### Password Generator Options")
 include_numbers = st.checkbox("Include Numbers", value=True)
 include_special = st.checkbox("Include Special Characters", value=True)
 generate_pw = st.button("Generate Strong Password")
 
 if generate_pw:
-    st.session_state["generated_password"] = generate_strong_password(include_numbers=include_numbers, include_special=include_special)
+    st.session_state["generated_password"] = generate_strong_password(
+        include_numbers=include_numbers, include_special=include_special
+    )
 
 if st.session_state["generated_password"]:
     st.success(f"Generated Strong Password: {st.session_state['generated_password']}")
