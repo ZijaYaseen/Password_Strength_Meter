@@ -15,6 +15,10 @@ st.markdown(
         align-items: center;
         min-height: 28px;
     }
+    @media (max-width: 768px) {
+        .center-button-container {
+            min-height: 0px; /* Mobile view: remove extra spacing */
+        }
     </style>
     """,
     unsafe_allow_html=True
